@@ -1,22 +1,16 @@
 class Solution {
 public:
-    int removeElement(vector<int>& nums, int val) 
+    int removeElement(vector<int>& nums, int val)
     {
-        int n = 0;
-        
-        vector<int> v2;
-
-        for(int i : nums)
+        int slowindex = 0;
+        for(int fastIndex = 0; fastIndex<nums.size(); fastIndex++)
         {
-            if(i != val)
+            if(nums[fastIndex] != val)
             {
-                v2.push_back(i);
-                n++;
+                nums[slowindex] = nums[fastIndex];
+                slowindex++;
             }
         }
-
-        nums = v2;
-
-        return n;
+        return slowindex;
     }
 };
