@@ -1,21 +1,28 @@
 #include <iostream>
 using namespace std;
-#include<iostream>
+#include<vector>
 #include<algorithm>
 
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) 
     {
-        vector<int> v;
+        vector<int> v(nums.size(),0);
+        int index = nums.size()-1;
 
-        for(int i : nums)
+        for(int i = 0 ,j = nums.size()-1; i<=j;)
         {
-            v.push_back(i*i);
+            if(nums[i]*nums[i] < nums[j]*nums[j])
+            {
+                v[index--] = nums[j]*nums[j];
+                j--;
+            }
+            else
+            {
+                v[index--] = nums[i]*nums[i];
+                i++;
+            }
         }
-        
-        sort(v.begin(),v.end());
-        
         return v;
     }
 };
