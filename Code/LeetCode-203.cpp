@@ -1,43 +1,39 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-// class Solution {
-// public:
-//     ListNode* removeElements(ListNode* head, int val) 
-//     {
-//         if(head == nullptr)return head;
+#include <iostream>
+using namespace std;
+#include<vector>
+#include<algorithm>
 
-//         head->next = removeElements(head->next,val);
 
-//         return head->val == val ? head->next : head;
-//     }
-// };
+struct ListNode
+{
+    int val;
+    ListNode *next;
+    ListNode() : val(0) , next(NULL){}
+    ListNode(int x) : val(x), next(NULL){}
+    ListNode(ListNode *node, int x) : val(x), next(node){}
+};
 
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) 
     {
-        ListNode *dummyHead = new ListNode(0,head);
-        ListNode *temp = dummyHead;
+        if(head == nullptr) return nullptr;
 
-        while (temp->next!=nullptr)
+        if(head->val == val)
         {
-            if(temp->next->val == val)
-            {
-                temp->next = temp->next->next;
-            }
-            else
-            {
-                temp = temp->next;
-            }
+            ListNode *nowNode = removeElements(head->next,val);
+            delete head;
+            return nowNode;
         }
-        return dummyHead->next;
+        else
+        {
+            head->next = removeElements(head->next,val);
+            return head;
+        }
     }
 };
+
+int main()
+{
+
+}
