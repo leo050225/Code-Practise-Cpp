@@ -37,6 +37,24 @@ public:
     }
 };
 
+//遞歸
+// class Solution {
+// public:
+//     ListNode* swapPairs(ListNode* head) 
+//     {
+//         if(!head || !head->next)return head;
+
+//         ListNode *newNode = head->next;
+
+//         head->next = swapPairs(newNode->next);
+
+//         newNode->next = head;
+
+//         return newNode;
+//     }
+
+// };
+
 int main()
 {
     return 0;
