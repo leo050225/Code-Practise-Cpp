@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
+class Solution {
+public:
+
+    void TreeSelc(vector<int>& result, TreeNode* node)
+    {
+        if(node == nullptr) return;
+        TreeSelc(result, node->left);
+        
+        TreeSelc(result, node->right);
+
+        result.push_back(node->val);
+
+        return;
+    }
+
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> result;
+        TreeSelc(result, root);
+
+        return result;
+    }
+};
+
+int main()
+{
+    
+}
