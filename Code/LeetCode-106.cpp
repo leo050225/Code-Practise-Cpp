@@ -17,35 +17,35 @@ public:
     TreeNode* Traversal(vector<int>& inorder, vector<int>& postorder)
     {   
         if(postorder.size() == 0)return nullptr;
-        
+
         int rootValue = postorder[postorder.size() - 1];
         TreeNode* root = new TreeNode(rootValue);
-        
+
         if(postorder.size() == 1)return root;
 
-        int index = 0;
-        for(index = 0; index<inorder.size(); index++)
+        int index;
+        for(index = 0; index < inorder.size(); index++)
         {
-            if(inorder[index] == rootValue) break;
+            if(inorder[index] == rootValue)
+                break;
         }
 
         vector<int> leftInorder(inorder.begin(), inorder.begin() + index);
         vector<int> rightInorder(inorder.begin() + index + 1, inorder.end());
-        
+
         postorder.resize(postorder.size() - 1);
 
         vector<int> leftPostorder(postorder.begin(), postorder.begin() + leftInorder.size());
-        vector<int> rightPostorer(postorder.begin() + leftInorder.size(), postorder.end());
+        vector<int> rightPostorder(postorder.begin() + leftInorder.size(), postorder.end());
 
         root->left = Traversal(leftInorder, leftPostorder);
-        root->right = Traversal(rightInorder, rightPostorer);
+        root->right = Traversal(rightInorder, rightPostorder);
 
         return root;
     }
 
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-        if(inorder.size() == 0 || postorder.size() == 0)return nullptr;
-
+        if(inorder.size() == 0 || postorder.size() == 0) return nullptr;
         return Traversal(inorder, postorder);
     }
 };
