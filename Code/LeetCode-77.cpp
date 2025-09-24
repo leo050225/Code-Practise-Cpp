@@ -14,12 +14,12 @@ public:
             return;
         }
 
-        for(int i = index; i <= n; i++)
+        for(int i = index; i <= n - (k - nums.size()) + 1; i++)
         {
             nums.push_back(i);
             backTracking(n, k, i + 1);
             nums.pop_back();
-        }
+        }  
     }
 
 
