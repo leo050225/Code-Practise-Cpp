@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 #include<vector>
+#include<algorithm>
 
 struct TreeNode {
     int val;
@@ -28,6 +29,7 @@ public:
 
         for(int i = index; i<candidates.size(); i++)
         {
+            if(candidates[i] > target)break;
             path.push_back(candidates[i]);
             BackTracking(candidates, target, sum + candidates[i], i);
             path.pop_back();
@@ -37,6 +39,7 @@ public:
     }
 
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
         BackTracking(candidates, target, 0, 0);
         return result;
     }
