@@ -45,3 +45,40 @@ int main()
 
     cout<< dp[m - 1][n] <<endl;
 }
+
+int main()
+// {
+//     int n, w;
+//     cin>>n>>w;
+
+//     vector<int> weight(n,0);
+//     vector<int> value(n,0);
+
+//     for(int i = 0; i<n; i++)
+//     {
+//         cin>>weight[i];
+//     }
+
+//     for(int i = 0; i<n; i++)
+//     {
+//         cin>>value[i];
+//     }
+
+//     vector<int> dp(w+1, 0);
+
+//     for(int i = weight[0]; i<=w; i++)
+//     {
+//         dp[i] = value[0];
+//     }
+
+//     for(int i = 1; i<n; i++)
+//     {
+//         for(int j = w; j>=weight[i]; j--)
+//         {
+//             if(j >= weight[i])
+//                 dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
+//         }
+//     }
+
+//     cout<< dp[w];
+// }
