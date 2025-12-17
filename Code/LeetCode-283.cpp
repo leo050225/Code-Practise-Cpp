@@ -8,15 +8,10 @@ public:
         
         int index = 0;
 
-        for(int i = 0; i<nums.size(); i++)
+        for(int i = 1; i<nums.size(); i++)
         {
-            if(nums[i]){
-                nums[index++] = nums[i];
-            }
-        }
-        while(index<nums.size())
-        {
-            nums[index++] = 0;
+            if(nums[i])
+                swap(nums[index++], nums[i]);
         }
     }
 };
