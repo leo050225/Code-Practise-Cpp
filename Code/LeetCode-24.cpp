@@ -25,6 +25,34 @@ public:
     }
 };
 
+// 跌代
+// class Solution {
+// public:
+//     ListNode* swapPairs(ListNode* head) {
+//         ListNode *dummyhaed = new ListNode(0,head);
+
+//         ListNode *temp = dummyhaed;
+//         ListNode *node1;
+//         ListNode *node2;
+
+//         while(temp->next != nullptr && temp->next->next != nullptr)
+//         {
+//             node1 = temp->next;
+//             node2 = temp->next->next;
+
+//             temp->next = node2;
+//             node1->next = node2->next;
+//             node2->next = node1;
+
+//             temp = node1;
+//         }
+
+//         temp = dummyhaed->next;
+//         delete dummyhaed;
+//         return temp;
+//     }
+// };
+
 int main()
 {
     
