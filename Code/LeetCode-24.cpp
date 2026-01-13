@@ -1,11 +1,5 @@
 #include <iostream>
 using namespace std;
-#include<algorithm>
-#include<vector>
-#include <climits>
-
-
-
 
 struct ListNode {
     int val;
@@ -14,48 +8,24 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
-
+ 
 class Solution {
 public:
-    ListNode* swapPairs(ListNode* head) 
-    {
-        ListNode *dunnyhead = new ListNode(0);
-        dunnyhead->next = head;
-        ListNode *cur = dunnyhead;
+    ListNode* swapPairs(ListNode* head) {
+        if(head == nullptr || head->next == nullptr)
+            return head;
 
-        while (cur->next != nullptr && cur->next->next != nullptr)
-        {
-            ListNode *tmp = cur->next;
-            ListNode *tmp1 = cur->next->next->next;
-            cur->next = cur->next->next;
-            cur->next->next = tmp;
-            tmp->next = tmp1;
-            cur = cur->next->next;
-        }
+        ListNode *newhaed = head->next;//指向頭節點後面節點
+
+        head->next = swapPairs(newhaed->next);//用下一輪兩個節點遞歸 返回結果給當前節點
+
+        newhaed->next = head;//當前節點變成新頭節點的後節點
         
-        return dunnyhead->next;
+        return newhaed;//返回新頭節點
     }
 };
 
-//遞歸
-// class Solution {
-// public:
-//     ListNode* swapPairs(ListNode* head) 
-//     {
-//         if(!head || !head->next)return head;
-
-//         ListNode *newNode = head->next;
-
-//         head->next = swapPairs(newNode->next);
-
-//         newNode->next = head;
-
-//         return newNode;
-//     }
-
-// };
-
 int main()
 {
-    return 0;
+    
 }
