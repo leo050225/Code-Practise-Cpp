@@ -1,8 +1,5 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-
-
-
 
 struct ListNode {
     int val;
@@ -11,36 +8,34 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
-
+ 
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode *dunnyhead = new ListNode(0);
-        dunnyhead->next = head;
-        ListNode *fast = dunnyhead;
-        ListNode *slow = dunnyhead;
-        n++;
-        while (n-- && fast!=nullptr)
-        {
-            fast = fast->next;
-        }
 
-        while (fast!=nullptr)
+        ListNode *dummyhead = new ListNode(0,head);
+        ListNode *slow = dummyhead;
+        ListNode *fast = dummyhead;
+
+        while(n--)
+            fast = fast->next;
+
+        while(fast->next != nullptr)
         {
             fast = fast->next;
             slow = slow->next;
         }
-        
-        ListNode *tmp = slow->next;
+
+        ListNode *temp = slow->next;
         slow->next = slow->next->next;
-        delete tmp;
-        tmp = nullptr;
-        
-        return dunnyhead->next;
+        delete temp;
+        slow = dummyhead->next;
+        delete(dummyhead);
+        return slow;
     }
 };
 
 int main()
 {
-    return 0;
+    
 }
