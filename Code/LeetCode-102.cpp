@@ -1,7 +1,7 @@
-#include<iostream>
-using namespace std;
+#include <iostream>
 #include<vector>
 #include<queue>
+using namespace std;
 
 struct TreeNode {
     int val;
@@ -15,35 +15,31 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
+        if(!root)return{};
+
         vector<vector<int>> result;
-        
-        if(root == nullptr) return result;
-
         queue<TreeNode*> que;
-
-        int size;
-
-        TreeNode* node;
-
         que.push(root);
-
 
         while(!que.empty())
         {
-            size =  que.size();
-            vector<int> v;
+            int levelSize = que.size();
+            vector<int> currentLevel;
+            currentLevel.reserve(levelSize);//預先留空間
 
-            for(int i = 0; i<size; i++)
+            for(int i = 0; i<levelSize; ++i)
             {
-                node = que.front();
+                TreeNode* node = que.front();
                 que.pop();
 
-                v.push_back(node->val);
-
-                if(node->left)que.push(node->left);
-                if(node->right)que.push(node->right);
+                currentLevel.push_back(node->val);
+                
+                if(node->left)
+                    que.push(node->left);
+                if(node->right)
+                    que.push(node->right);   
             }
-            result.push_back(v);
+            result.push_back(move(currentLevel));//減少身拷貝開銷
         }
         return result;
     }
@@ -51,5 +47,5 @@ public:
 
 int main()
 {
-
+    
 }
