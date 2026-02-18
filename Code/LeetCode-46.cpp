@@ -1,40 +1,40 @@
 #include <iostream>
-using namespace std;
 #include<vector>
-#include<unordered_set>
+using namespace std;
 
 class Solution {
 public:
-    vector<vector<int>> result;
-    vector<int> path;
-
-    void BackTracking(vector<int>& nums, vector<bool>& used)
-    {
-        if(path.size() == nums.size())
-        {
-            result.push_back(path);
-        }
-
-        for(int i = 0; i<nums.size(); i++)
-        {
-            if(used[i] == true) continue;
-            path.push_back(nums[i]);
-            used[i] = true;
-            BackTracking(nums, used);
-            path.pop_back();
-            used[i] = false;
-        }
-        return;
-    }
-
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<bool> used(nums.size(), false);
-        BackTracking(nums,used);
+        vector<vector<int>> result;
+
+        backtrack(nums, 0, result);
+
         return result;
     }
+
+    void backtrack(vector<int>& nums, int start, vector<vector<int>>& res)
+    {
+        if(start == nums.size())
+        {
+            res.push_back(nums);
+            return;
+        }
+
+        for(int i = start; i<nums.size(); i++)
+        {
+            swap(nums[start], nums[i]);
+
+            backtrack(nums, start + 1, res);
+
+            swap(nums[start], nums[i]);
+        } 
+    }
 };
+
+
 
 int main()
 {
     
 }
+
