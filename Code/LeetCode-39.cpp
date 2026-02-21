@@ -1,50 +1,44 @@
-#include<iostream>
-using namespace std;
+#include <iostream>
 #include<vector>
 #include<algorithm>
-
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
+using namespace std;
 
 class Solution {
 public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> res;
+        vector<int> path;
+        sort(candidates.begin(), candidates.end());
 
-    vector<vector<int>> result;
-    vector<int> path;
+        backtrack(candidates, target, res, path, 0);
 
-    void BackTracking(vector<int>& candidates, int target, int sum, int index)
+        return res;
+    }
+
+    void backtrack(const vector<int>& candidates, int target, vector<vector<int>>& res, vector<int>& path, int index)
     {
-        if(sum > target) return;
-        if(sum == target)
+        if(target == 0)
         {
-            result.push_back(path);
+            res.push_back(path);
             return;
         }
 
         for(int i = index; i<candidates.size(); i++)
         {
-            if(candidates[i] > target)break;
+            if(target - candidates[i] < 0)
+            {
+                break;
+            }
+
             path.push_back(candidates[i]);
-            BackTracking(candidates, target, sum + candidates[i], i);
+            backtrack(candidates, target - candidates[i], res, path, i);
             path.pop_back();
         }
-        
-        return;
-    }
-
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        sort(candidates.begin(), candidates.end());
-        BackTracking(candidates, target, 0, 0);
-        return result;
     }
 };
 
 int main()
 {
+    
 }
+
