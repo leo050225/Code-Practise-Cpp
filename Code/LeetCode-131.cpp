@@ -1,18 +1,21 @@
 #include<iostream>
 using namespace std;
-#include<vector>
-#include<algorithm>
 
 class Solution {
-
-    vector<vector<string>> result;
+public:
+    vector<vector<string>> res;
     vector<string> path;
 
-    void BackTracking(const string& s, int index)
+    vector<vector<string>> partition(string s) {
+        backtrack(s, 0);
+        return res;
+    }
+
+    void backtrack(const string& s, int index)
     {
         if(index >= s.size())
         {
-            result.push_back(path);
+            res.push_back(path);
             return;
         }
 
@@ -20,22 +23,20 @@ class Solution {
         {
             if(isPalindrome(s, index, i))
             {
-                string str = s.substr(index, i - index + 1);
-                path.push_back(str);
+                path.push_back(s.substr(index, i - index + 1));
+                backtrack(s, i+1);
+                path.pop_back();
             }
             else
             {
                 continue;
             }
-            BackTracking(s, i + 1);
-            path.pop_back();
         }
-        return;
     }
 
-    bool isPalindrome(const string& s, int start, int end)
+    bool isPalindrome(const string& s, int left, int right)
     {
-        for(int i = start, j = end; i < j; i++, j--)
+        for(int i = left, j = right; i<=j; i++, j--)
         {
             if(s[i] != s[j])
             {
@@ -44,14 +45,9 @@ class Solution {
         }
         return true;
     }
-
-public:
-    vector<vector<string>> partition(string s) {
-        BackTracking(s,0);
-        return result;
-    }
 };
 
 int main()
 {
+
 }
